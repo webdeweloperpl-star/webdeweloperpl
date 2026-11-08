@@ -259,7 +259,8 @@
     .hero-mobile { display: none; }
     @keyframes marquee { to { transform: translateX(calc(-50% - 7px)); } }
     @media (max-width: 900px) {
-      .hero-mobile { display: block; grid-column: 1 / -1; animation: heroIn 0.7s ease-out 0.4s both; }
+      .hero-mobile { display: block; margin-top: 24px; animation: heroIn 0.7s ease-out 0.3s both; }
+      .hero-btns { margin-top: 18px; animation-delay: 0.4s; }
       .hero-points { animation-delay: 0.5s; }
       .marquee {
         overflow: hidden; margin: 0 calc(var(--pad-x) * -1); padding: 6px 0 14px;
@@ -475,6 +476,19 @@
         <div class="hero-text">
           <h1 class="hero-h1">Nowoczesne strony, które <em>przyprowadzają klientów</em></h1>
           <p class="hero-sub">Projektuję i wdrażam przejrzyste strony internetowe, dzięki którym odwiedzający stają się Twoimi klientami.</p>
+          <!-- Wizual na telefonie: pasek realizacji przewijany w pętli (przed przyciskami) -->
+          <div class="hero-mobile" aria-hidden="true">
+            <div class="marquee">
+              <div class="marquee-track">
+                <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt=""></div>
+                <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt=""></div>
+                <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/orlowska.jpg" alt=""></div>
+                <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt="" loading="lazy"></div>
+                <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt="" loading="lazy"></div>
+                <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/orlowska.jpg" alt="" loading="lazy"></div>
+              </div>
+            </div>
+          </div>
           <div class="hero-btns">
             <a href="#realizacje" class="btn btn-primary">Zobacz realizacje</a>
             <a href="#kontakt" class="btn btn-outline">Napisz do mnie</a>
@@ -483,19 +497,6 @@
         <div class="hero-visual" aria-hidden="true">
           <div class="browser b1"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt=""></div>
           <div class="browser b2"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt=""></div>
-        </div>
-        <!-- Wizual na telefonie: pasek realizacji przewijany w pętli -->
-        <div class="hero-mobile" aria-hidden="true">
-          <div class="marquee">
-            <div class="marquee-track">
-              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt=""></div>
-              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt=""></div>
-              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/orlowska.jpg" alt=""></div>
-              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt="" loading="lazy"></div>
-              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt="" loading="lazy"></div>
-              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/orlowska.jpg" alt="" loading="lazy"></div>
-            </div>
-          </div>
         </div>
         <!-- Atuty: osobny rząd na całą szerokość, żeby zmieściły się poziomo na desktopie -->
         <ul class="hero-points">
