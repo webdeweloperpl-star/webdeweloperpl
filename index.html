@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Deweloper PL · Nowoczesne strony dla lokalnych firm</title>
+  <meta name="description" content="Projektuję i wdrażam nowoczesne strony internetowe dla lokalnych firm. Najpierw zobaczysz projekt, potem decydujesz. Suwałki i zdalnie w całej Polsce. Tel. 600 948 664.">
+  <meta name="theme-color" content="#2554f5">
+  <link rel="canonical" href="https://webdeweloperpl.vercel.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Web Deweloper PL · Nowoczesne strony dla lokalnych firm">
+  <meta property="og:description" content="Strony, które dobrze wyglądają na telefonie i przyprowadzają klientów. Najpierw projekt, potem decyzja.">
+  <meta property="og:url" content="https://webdeweloperpl.vercel.app/">
+  <meta property="og:image" content="https://webdeweloperpl.vercel.app/img/orlowska.jpg">
+  <meta property="og:locale" content="pl_PL">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="favicon-192.png">
+
+  <!-- Motyw ustawiany przed renderem, żeby nie było mignięcia -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Web Deweloper PL",
+    "description": "Projektowanie i wdrażanie stron internetowych dla lokalnych firm.",
+    "url": "https://webdeweloperpl.vercel.app/",
+    "telephone": "+48600948664",
+    "email": "webdeweloperpl@gmail.com",
+    "address": { "@type": "PostalAddress", "addressLocality": "Suwałki", "addressCountry": "PL" },
+    "areaServed": "PL"
+  }
+  </script>
+
+  <style>
+    /* ---------- TOKENY ---------- */
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --surface-2: #f1f2f5;
+      --text: #0f1115;
+      --muted: #4b5260;
+      --border: #e3e5ea;
+      --accent: #2554f5;
+      --accent-soft: rgba(37, 84, 245, 0.08);
+      --btn-bg: #2554f5;
+      --btn-ink: #ffffff;
+      --nav-bg: rgba(250, 250, 250, 0.82);
+      --shadow: 0 1px 2px rgba(15, 17, 21, 0.04), 0 12px 32px rgba(15, 17, 21, 0.08);
+
+      --ff-head: 'Manrope', system-ui, sans-serif;
+      --ff-body: 'Inter', system-ui, sans-serif;
+      --nav-h: 72px;
+      --pad-x: 48px;
+      --pad-y: 100px;
+      --maxw: 1200px;
+      --radius: 14px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0c0d10;
+      --surface: #14161b;
+      --surface-2: #1b1e24;
+      --text: #f1f2f4;
+      --muted: #a9afbb;
+      --border: #262a31;
+      --accent: #7b97ff;
+      --accent-soft: rgba(123, 151, 255, 0.1);
+      --btn-bg: #3d63ff;
+      --btn-ink: #ffffff;
+      --nav-bg: rgba(12, 13, 16, 0.8);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (max-width: 768px) {
+      :root { --pad-x: 20px; --pad-y: 64px; }
+    }
+
+    /* ---------- BAZA ---------- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--ff-body);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+    h1, h2, h3 { font-family: var(--ff-head); font-weight: 700; letter-spacing: -0.02em; line-height: 1.12; text-wrap: balance; }
+    p { text-wrap: pretty; }
+
+    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad-x); }
+    .section { padding: var(--pad-y) 0; }
+
+    .label {
+      display: inline-flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.6;
+      color: var(--accent);
+    }
+    .label::before { content: ''; flex-shrink: 0; width: 18px; height: 2px; margin-top: 0.75em; background: currentColor; border-radius: 2px; }
+
+    .section-head { max-width: 640px; margin-bottom: 56px; }
+    .section-h2 { font-size: clamp(32px, 4.2vw, 46px); margin-top: 14px; }
+    .section-sub { margin-top: 16px; color: var(--muted); font-size: 17px; }
+
+    /* ---------- PRZYCISKI ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: var(--ff-body); font-size: 15px; font-weight: 500;
+      padding: 15px 36px; border-radius: 999px; border: 1px solid transparent;
+      transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--btn-bg); color: var(--btn-ink); box-shadow: 0 6px 20px rgba(37, 84, 245, 0.25); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(37, 84, 245, 0.32); }
+    .btn-outline { border-color: var(--border); color: var(--text); background: var(--surface); }
+    .btn-outline:hover { border-color: var(--text); transform: translateY(-2px); }
+    .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 50; height: var(--nav-h);
+      background: var(--nav-bg);
+      -webkit-backdrop-filter: saturate(160%) blur(14px);
+      backdrop-filter: saturate(160%) blur(14px);
+      border-bottom: 1px solid var(--border);
+      transition: background-color 0.3s ease;
+    }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font-family: var(--ff-head); font-weight: 800; font-size: 19px; letter-spacing: -0.02em; white-space: nowrap; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 34px; list-style: none; }
+    .nav-links a { font-size: 15px; font-weight: 500; color: var(--muted); transition: color 0.2s ease; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-cta { padding: 11px 24px; font-size: 14px; }
+
+    .theme-btn, .burger {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border); background: var(--surface);
+      transition: border-color 0.2s ease;
+    }
+    .theme-btn:hover, .burger:hover { border-color: var(--text); }
+    .theme-btn svg { width: 18px; height: 18px; }
+    .theme-btn .ico-sun { display: none; }
+    [data-theme="dark"] .theme-btn .ico-sun { display: block; }
+    [data-theme="dark"] .theme-btn .ico-moon { display: none; }
+
+    .burger { display: none; flex-direction: column; gap: 5px; }
+    .burger span { width: 16px; height: 1.5px; background: var(--text); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; }
+    .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Menu mobilne - rodzeństwo nav, nie dziecko (backdrop-filter łamie position: fixed) */
+    .mmenu {
+      position: fixed; inset: var(--nav-h) 0 0 0; z-index: 49;
+      background: var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+      opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .mmenu.open { opacity: 1; visibility: visible; }
+    .mmenu a:not(.btn) { font-family: var(--ff-head); font-size: 26px; font-weight: 600; }
+    .mmenu .cta { font-size: 15px; font-weight: 600; padding: 20px 0; width: 80%; max-width: 340px; margin-bottom: 12px; }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .burger { display: inline-flex; }
+    }
+
+    /* ---------- HERO ---------- */
+    .hero { min-height: calc(100svh - var(--nav-h)); display: flex; align-items: center; padding: 48px 0; position: relative; overflow: hidden; isolation: isolate; }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 0%, transparent 75%);
+      mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 0%, transparent 75%);
+      opacity: 0.6;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+    .hero-h1 { font-size: clamp(36px, 5.2vw, 62px); font-weight: 800; margin: 20px 0 22px; }
+    .hero-h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub { font-size: 18px; color: var(--muted); max-width: 500px; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .hero-points { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 34px; }
+    .nowrap { white-space: nowrap; }
+    .hero-points li { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; }
+    .hero-points svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
+
+    /* Wizual hero: dwie ramki przeglądarki */
+    .hero-visual { position: relative; height: min(460px, calc(100svh - var(--nav-h) - 140px)); min-height: 320px; }
+    .browser {
+      position: absolute; border-radius: 12px; overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow);
+    }
+    .browser-bar { height: 30px; display: flex; align-items: center; gap: 6px; padding: 0 12px; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+    .browser-bar i { width: 9px; height: 9px; border-radius: 50%; background: var(--border); }
+    .browser img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+    .hero-visual .b1 { width: 80%; top: 0; right: 0; }
+    .hero-visual .b2 { width: 76%; bottom: 0; left: 0; }
+
+    @keyframes heroIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .hero .label, .hero-h1, .hero-sub, .hero-btns, .hero-points, .hero-visual .b1, .hero-visual .b2 {
+      animation: heroIn 0.7s ease-out both;
+    }
+    .hero-h1 { animation-delay: 0.1s; }
+    .hero-sub { animation-delay: 0.2s; }
+    .hero-btns { animation-delay: 0.3s; }
+    .hero-points { animation-delay: 0.4s; }
+    .hero-visual .b1 { animation-delay: 0.3s; }
+    .hero-visual .b2 { animation-delay: 0.5s; }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 40px 0 56px; align-items: center; }
+      .hero-h1 { margin: 14px 0 16px; }
+      .label-dot { display: none; }
+      .hero .nowrap { display: block; }
+      .hero-sub { font-size: 16px; line-height: 1.6; }
+      .hero-btns { flex-direction: column; align-items: stretch; margin-top: 28px; }
+      .hero-btns .btn { text-align: center; }
+      .hero-points { flex-direction: column; margin-top: 28px; }
+    }
+
+    /* ---------- FADE (kolejka z góry na dół) ---------- */
+    .fade { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade.on { opacity: 1; transform: none; }
+
+    /* ---------- REALIZACJE ---------- */
+    .work { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .work-card {
+      display: flex; flex-direction: column;
+      background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .work-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .work-shot { aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border); background: var(--surface-2); }
+    .work-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.6s ease; }
+    .work-card:hover .work-shot img { transform: scale(1.03); }
+    .work-body { display: flex; flex-direction: column; flex: 1; padding: 26px 26px 24px; }
+    .work-tag { font-size: 13px; font-weight: 500; color: var(--accent); }
+    .work-name { font-size: 22px; margin: 6px 0 10px; }
+    .work-desc { font-size: 15px; color: var(--muted); }
+    .work-link {
+      margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 15px; font-weight: 500;
+    }
+    .work-body .work-desc { margin-bottom: 22px; }
+    .work-link svg { width: 18px; height: 18px; color: var(--accent); transition: transform 0.2s ease; }
+    .work-card:hover .work-link svg { transform: translate(3px, -3px); }
+
+    /* ---------- OFERTA ---------- */
+    .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .offer-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px; display: flex; flex-direction: column;
+    }
+    .offer-ico {
+      width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+      background: var(--accent-soft); color: var(--accent); margin-bottom: 22px;
+    }
+    .offer-ico svg { width: 22px; height: 22px; }
+    .offer-card h3 { font-size: 21px; margin-bottom: 10px; }
+    .offer-card p { font-size: 15px; color: var(--muted); }
+
+    .offer-main {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center;
+      padding: 44px; border-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent-soft), transparent 60%), var(--surface);
+    }
+    .offer-main .badge {
+      display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--btn-ink); background: var(--btn-bg); padding: 6px 12px; border-radius: 999px; margin-bottom: 18px;
+    }
+    .offer-main h3 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 14px; }
+    .offer-main p { font-size: 16px; }
+    .offer-list { list-style: none; display: grid; gap: 14px; }
+    .offer-list li { display: flex; gap: 12px; font-size: 15px; font-weight: 500; }
+    .offer-list svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+    /* ---------- PROCES ---------- */
+    .process { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; list-style: none; counter-reset: step; }
+    .step { position: relative; padding: 30px 26px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); }
+    .step-num {
+      font-family: var(--ff-head); font-size: 44px; font-weight: 800; line-height: 1;
+      color: var(--accent); opacity: 0.45; margin-bottom: 22px; display: block;
+    }
+    .step h3 { font-size: 19px; margin-bottom: 10px; }
+    .step p { font-size: 15px; color: var(--muted); }
+
+    /* ---------- KONTAKT ---------- */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: start; }
+    .channels { display: grid; gap: 14px; margin-top: 8px; }
+    .channel {
+      display: flex; align-items: center; gap: 16px;
+      padding: 18px 20px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .channel:hover { border-color: var(--accent); transform: translateX(4px); }
+    .channel-ico { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); flex-shrink: 0; }
+    .channel-ico svg { width: 21px; height: 21px; }
+    .channel small { display: block; font-size: 13px; font-weight: 500; color: var(--muted); }
+    .channel strong { font-family: var(--ff-head); font-size: 18px; font-weight: 700; word-break: break-word; }
+    .channel[hidden] { display: none; }
+
+    .cform {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    }
+    .field { display: flex; flex-direction: column; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 14px; font-weight: 500; }
+    .field input, .field textarea {
+      font: inherit; font-size: 16px; color: var(--text);
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 13px 14px; transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .field textarea { resize: vertical; min-height: 130px; }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .hp { position: absolute; left: -9999px; }
+    .consent { grid-column: 1 / -1; display: flex; gap: 10px; font-size: 14px; color: var(--muted); align-items: flex-start; }
+    .consent input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+    .form-actions { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 12px; }
+    .form-actions .btn { width: 100%; }
+    .form-actions .btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+    .form-msg { font-size: 15px; font-weight: 500; }
+    .form-msg.ok { color: #12865a; }
+    .form-msg.err { color: #d0342c; }
+    [data-theme="dark"] .form-msg.ok { color: #4ade9b; }
+    [data-theme="dark"] .form-msg.err { color: #ff7b72; }
+
+    /* ---------- STOPKA ---------- */
+    .footer { border-top: 1px solid var(--border); padding: 40px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; font-size: 15px; color: var(--muted); }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-links button { font-size: 15px; color: var(--muted); }
+    .footer-links button:hover { color: var(--text); }
+
+    /* ---------- POLITYKA PRYWATNOŚCI ---------- */
+    .pp {
+      width: min(640px, calc(100% - 32px)); max-height: 85svh; margin: auto;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 0;
+    }
+    .pp::backdrop { background: rgba(0, 0, 0, 0.55); }
+    .pp-head { position: sticky; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 22px 28px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .pp-head h2 { font-size: 22px; }
+    .pp-body { padding: 24px 28px 32px; font-size: 15px; color: var(--muted); }
+    .pp-body h3 { font-size: 16px; color: var(--text); margin: 22px 0 6px; }
+    .pp-body strong { color: var(--text); }
+
+    /* ---------- RESPONSYWNOŚĆ SEKCJI ---------- */
+    @media (max-width: 1024px) {
+      .steps { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .work-grid, .offer-grid { grid-template-columns: 1fr; }
+      .offer-main { grid-template-columns: 1fr; gap: 28px; padding: 32px 26px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 768px) {
+      .section-head { margin-bottom: 40px; }
+      .section-sub { font-size: 16px; }
+      .offer-card { padding: 28px 24px; }
+      .steps { grid-template-columns: 1fr; gap: 14px; }
+      .step { padding: 26px 24px; }
+      .step-num { font-size: 38px; margin-bottom: 16px; }
+      .cform { grid-template-columns: 1fr; padding: 26px 20px; }
+      .channel { padding: 16px; gap: 14px; }
+      .channel strong { font-size: 16px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .fade { opacity: 1; transform: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" aria-label="Główna nawigacja">
+    <div class="container nav-inner">
+      <a href="#" class="logo" aria-label="Web Deweloper PL, strona główna">Web Deweloper <span>PL</span></a>
+      <ul class="nav-links">
+        <li><a href="#realizacje">Realizacje</a></li>
+        <li><a href="#oferta">Oferta</a></li>
+        <li><a href="#proces">Proces</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="theme-btn" id="theme-btn" type="button" aria-label="Przełącz tryb jasny i ciemny">
+          <svg class="ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+        <a href="#kontakt" class="btn btn-primary nav-cta">Darmowa wycena</a>
+        <button class="burger" id="burger" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="mmenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="mmenu" id="mmenu">
+    <a href="#kontakt" class="btn btn-primary cta">Darmowa wycena</a>
+    <a href="#realizacje">Realizacje</a>
+    <a href="#oferta">Oferta</a>
+    <a href="#proces">Proces</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="label"><span>Strony dla lokalnych firm <span class="label-dot">·</span> <span class="nowrap">Suwałki i cała Polska</span></span></span>
+          <h1 class="hero-h1">Nowoczesne strony, które <em>przyprowadzają klientów</em></h1>
+          <p class="hero-sub">Projektuję i wdrażam przejrzyste strony dla salonów, gabinetów i małych firm. Dopracowane pod telefon, szybkie i proste w kontakcie.</p>
+          <div class="hero-btns">
+            <a href="#realizacje" class="btn btn-primary">Zobacz realizacje</a>
+            <a href="#kontakt" class="btn btn-outline">Napisz do mnie</a>
+          </div>
+          <ul class="hero-points">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Najpierw projekt, potem decyzja</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Idealna na telefonie</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Bezpośredni kontakt ze mną</li>
+          </ul>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="browser b1"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt=""></div>
+          <div class="browser b2"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/orlowska.jpg" alt=""></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REALIZACJE -->
+    <section class="section work" id="realizacje">
+      <div class="container">
+        <div class="section-head">
+          <span class="label fade">Realizacje</span>
+          <h2 class="section-h2 fade">Strony, które już działają dla moich klientów</h2>
+          <p class="section-sub fade">Każda zaprojektowana od zera pod konkretną firmę. Kliknij i zobacz na żywo, najlepiej na telefonie.</p>
+        </div>
+        <div class="work-grid">
+          <a class="work-card fade" href="https://gabinetjolantaorlowska.pl/" target="_blank" rel="noopener">
+            <div class="work-shot"><img src="img/orlowska.jpg" alt="Strona Gabinetu Kosmetyki i Naturopatii Jolanta Orłowska" loading="lazy" width="1440" height="900"></div>
+            <div class="work-body">
+              <span class="work-tag">Kosmetyka i naturopatia · Suwałki</span>
+              <h3 class="work-name">Gabinet Jolanta Orłowska</h3>
+              <p class="work-desc">Nowa strona zamiast starej: zabiegi, cennik w zakładkach, opinie i szybki kontakt telefoniczny.</p>
+              <span class="work-link">gabinetjolantaorlowska.pl<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            </div>
+          </a>
+          <a class="work-card fade" href="https://beautyupsuwalki.pl/" target="_blank" rel="noopener">
+            <div class="work-shot"><img src="img/beautyup.jpg" alt="Strona salonu Beauty Up w Suwałkach" loading="lazy" width="1440" height="900"></div>
+            <div class="work-body">
+              <span class="work-tag">Salon beauty i szkolenia · Suwałki</span>
+              <h3 class="work-name">Beauty Up</h3>
+              <p class="work-desc">Minimalistyczny redesign: oferta, cennik, szkolenia stacjonarne i formularz kontaktowy.</p>
+              <span class="work-link">beautyupsuwalki.pl<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            </div>
+          </a>
+          <a class="work-card fade" href="https://centrumnaturalnejrozkoszy.com/" target="_blank" rel="noopener">
+            <div class="work-shot"><img src="img/cnr.jpg" alt="Strona Centrum Naturalnej Rozkoszy" loading="lazy" width="1440" height="900"></div>
+            <div class="work-body">
+              <span class="work-tag">Zdrowe słodkości · sklep i catering</span>
+              <h3 class="work-name">Centrum Naturalnej Rozkoszy</h3>
+              <p class="work-desc">Strona z produktami, cateringiem i sklepem online. Apetyczne zdjęcia i jasna ścieżka do zakupu.</p>
+              <span class="work-link">centrumnaturalnejrozkoszy.com<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFERTA -->
+    <section class="section" id="oferta">
+      <div class="container">
+        <div class="section-head">
+          <span class="label fade">Oferta</span>
+          <h2 class="section-h2 fade">Wszystko, czego potrzebuje firma w internecie</h2>
+          <p class="section-sub fade">Zaczynamy od strony, a potem dbam o to, żeby klienci mogli Cię łatwo znaleźć.</p>
+        </div>
+        <div class="offer-grid">
+          <article class="offer-card offer-main fade">
+            <div>
+              <span class="badge">Najczęściej wybierane</span>
+              <h3>Strona wizytówka dla Twojej firmy</h3>
+              <p class="muted">Jedna przejrzysta strona, na której klient w kilka sekund widzi, co robisz, ile to kosztuje i jak się z Tobą skontaktować. Projekt pod Twoją markę, nie gotowy szablon.</p>
+            </div>
+            <ul class="offer-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Projekt do wglądu, zanim podejmiesz decyzję</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dopracowana przede wszystkim pod telefon</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Oferta, cennik, opinie i kontakt w jednym miejscu</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Przyciski do Booksy, telefonu i Messengera</li>
+            </ul>
+          </article>
+          <article class="offer-card fade">
+            <div class="offer-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg></div>
+            <h3>Odświeżenie starej strony</h3>
+            <p>Masz stronę na WordPressie lub Wixie, która wygląda przestarzale albo źle działa na telefonie? Przebuduję ją na nowoczesną i szybką.</p>
+          </article>
+          <article class="offer-card fade">
+            <div class="offer-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+            <h3>Widoczność w Google</h3>
+            <p>Strona przygotowana pod wyszukiwanie lokalne: poprawne opisy, dane firmy dla Google i powiązanie z wizytówką w Mapach.</p>
+          </article>
+          <article class="offer-card fade">
+            <div class="offer-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></div>
+            <h3>Opieka i zmiany</h3>
+            <p>Nowy cennik, zdjęcia z ostatnich zabiegów, zmiana godzin otwarcia. Piszesz do mnie, a ja wprowadzam zmiany na stronie.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCES -->
+    <section class="section process" id="proces">
+      <div class="container">
+        <div class="section-head">
+          <span class="label fade">Proces</span>
+          <h2 class="section-h2 fade">Jak wygląda współpraca</h2>
+          <p class="section-sub fade">Prosto i bez technicznego żargonu. Ty skupiasz się na firmie, ja na stronie.</p>
+        </div>
+        <ol class="steps">
+          <li class="step fade">
+            <span class="step-num">01</span>
+            <h3>Rozmowa</h3>
+            <p>Krótko o Twojej firmie, klientach i o tym, czego oczekujesz od strony. Telefonicznie albo przez wiadomość.</p>
+          </li>
+          <li class="step fade">
+            <span class="step-num">02</span>
+            <h3>Projekt do akceptacji</h3>
+            <p>Przygotowuję projekt na Twoich zdjęciach i treściach. Oglądasz go na telefonie i zgłaszasz poprawki.</p>
+          </li>
+          <li class="step fade">
+            <span class="step-num">03</span>
+            <h3>Publikacja</h3>
+            <p>Podpinam domenę, ustawiam wszystko pod Google i strona trafia do internetu.</p>
+          </li>
+          <li class="step fade">
+            <span class="step-num">04</span>
+            <h3>Opieka</h3>
+            <p>Po starcie dalej jestem pod telefonem. Zmiany w cenniku czy ofercie wprowadzam na bieżąco.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="section" id="kontakt">
+      <div class="container contact-grid">
+        <div>
+          <div class="section-head" style="margin-bottom: 32px;">
+            <span class="label fade">Kontakt</span>
+            <h2 class="section-h2 fade">Porozmawiajmy o Twojej stronie</h2>
+            <p class="section-sub fade">Zadzwoń, napisz na WhatsAppie albo zostaw wiadomość w formularzu. Odpowiadam zwykle tego samego dnia.</p>
+          </div>
+          <div class="channels">
+            <a class="channel fade" href="tel:+48600948664">
+              <span class="channel-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>
+              <span><small>Zadzwoń</small><strong>600 948 664</strong></span>
+            </a>
+            <a class="channel fade" href="https://wa.me/48600948664" target="_blank" rel="noopener">
+              <span class="channel-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 10c0 3 2 5 5 5l1.2-1.2-2-1-1 .7a3.5 3.5 0 0 1-1.7-1.7l.7-1-1-2z"/></svg></span>
+              <span><small>WhatsApp</small><strong>Napisz wiadomość</strong></span>
+            </a>
+            <a class="channel fade" href="mailto:webdeweloperpl@gmail.com">
+              <span class="channel-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 6 9 7 9-7"/></svg></span>
+              <span><small>E-mail</small><strong>webdeweloperpl@gmail.com</strong></span>
+            </a>
+            <!-- Messenger: podmień link i usuń atrybut hidden po założeniu profilu FB -->
+            <a class="channel fade" href="https://m.me/TWOJ_PROFIL" target="_blank" rel="noopener" hidden>
+              <span class="channel-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5C6.5 2.5 2.5 6.5 2.5 11.6c0 2.8 1.3 5.2 3.4 6.8V22l3.2-1.8c.9.3 1.9.4 2.9.4 5.5 0 9.5-4 9.5-9S17.5 2.5 12 2.5z"/><path d="m7 14 3.5-3.7 2 2L16 9l-3.5 3.7-2-2z"/></svg></span>
+              <span><small>Messenger</small><strong>Napisz na Facebooku</strong></span>
+            </a>
+          </div>
+        </div>
+
+        <form class="cform fade" id="cform" novalidate>
+          <!-- Web3Forms: wklej swój klucz z web3forms.com -->
+          <input type="hidden" name="access_key" value="WEB3FORMS_KEY">
+          <input type="hidden" name="subject" value="Nowe zapytanie ze strony Web Deweloper PL">
+          <input type="hidden" name="from_name" value="Strona Web Deweloper PL">
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+          <div class="field">
+            <label for="f-name">Imię</label>
+            <input type="text" id="f-name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-phone">Telefon lub e-mail</label>
+            <input type="text" id="f-phone" name="contact" autocomplete="tel" required>
+          </div>
+          <div class="field full">
+            <label for="f-company">Nazwa firmy lub obecna strona (opcjonalnie)</label>
+            <input type="text" id="f-company" name="company">
+          </div>
+          <div class="field full">
+            <label for="f-msg">Wiadomość</label>
+            <textarea id="f-msg" name="message" rows="4" placeholder="Czym zajmuje się Twoja firma i czego potrzebujesz?" required></textarea>
+          </div>
+          <label class="consent">
+            <input type="checkbox" id="f-consent" required>
+            <span>Zgadzam się na przetwarzanie moich danych w celu odpowiedzi na wiadomość. Więcej w <button type="button" class="pp-open" style="text-decoration: underline; color: var(--text);">polityce prywatności</button>.</span>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="f-submit">Wyślij wiadomość</button>
+            <p class="form-msg" id="f-out" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- STOPKA -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="#" class="logo">Web Deweloper <span>PL</span></a>
+      <div class="footer-links">
+        <a href="tel:+48600948664">600 948 664</a>
+        <a href="mailto:webdeweloperpl@gmail.com">webdeweloperpl@gmail.com</a>
+        <button type="button" class="pp-open">Polityka prywatności</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- POLITYKA PRYWATNOŚCI -->
+  <dialog class="pp" id="pp" aria-labelledby="pp-title">
+    <div class="pp-head">
+      <h2 id="pp-title">Polityka prywatności</h2>
+      <button type="button" class="theme-btn" id="pp-close" aria-label="Zamknij">&#x2715;</button>
+    </div>
+    <div class="pp-body">
+      <p><strong>Administrator danych:</strong> Web Deweloper PL, tel. 600 948 664, e-mail webdeweloperpl@gmail.com.</p>
+      <h3>Cel i podstawa</h3>
+      <p>Dane podane w formularzu, telefonicznie lub mailowo (imię, telefon lub e-mail, treść wiadomości) przetwarzam wyłącznie w celu odpowiedzi i przygotowania oferty, na podstawie art. 6 ust. 1 lit. a i b RODO. Nie wysyłam reklam i nie przekazuję danych innym firmom.</p>
+      <h3>Formularz</h3>
+      <p>Wiadomości z formularza trafiają na moją skrzynkę przez usługę Web3Forms, która działa wyłącznie jako pośrednik w dostarczeniu wiadomości.</p>
+      <h3>Okres przechowywania</h3>
+      <p>Dane przechowuję tak długo, jak to potrzebne do udzielenia odpowiedzi i ewentualnej współpracy, a następnie przez okres wymagany przepisami prawa.</p>
+      <h3>Hosting i czcionki</h3>
+      <p>Strona jest hostowana przez Vercel i korzysta z Google Fonts. Przeglądarka łączy się z ich serwerami, przekazując adres IP w celu wyświetlenia strony. Strona nie używa plików cookies do śledzenia.</p>
+      <h3>Twoje prawa</h3>
+      <p>Masz prawo do wglądu, poprawienia i usunięcia swoich danych oraz wniesienia skargi do Prezesa UODO. Wystarczy napisać na adres podany wyżej.</p>
+    </div>
+  </dialog>
+
+  <script>
+    // Motyw
+    document.getElementById('theme-btn').addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+
+    // Menu mobilne
+    const burger = document.getElementById('burger');
+    const mmenu = document.getElementById('mmenu');
+    const toggleMenu = open => {
+      burger.classList.toggle('open', open);
+      mmenu.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    burger.addEventListener('click', () => toggleMenu(!mmenu.classList.contains('open')));
+    mmenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+    window.addEventListener('resize', () => { if (window.innerWidth > 900) toggleMenu(false); });
+
+    // Fade on scroll - zawsze w kolejności z góry na dół
+    const fades = [...document.querySelectorAll('.fade')];
+    let revealed = 0;
+    const pending = new Set();
+    let frame = null;
+
+    const showInstant = el => {
+      el.style.transition = 'none';
+      el.classList.add('on');
+      fadeObs.unobserve(el);
+    };
+
+    const flush = () => {
+      frame = null;
+      if (!pending.size) return;
+      const maxIdx = Math.max(...[...pending].map(el => fades.indexOf(el)));
+      let step = 0;
+      for (let i = revealed; i <= maxIdx; i++) {
+        const el = fades[i];
+        if (el.classList.contains('on')) continue;
+        if (el.getBoundingClientRect().bottom < 0) {
+          showInstant(el); // przeskoczony (klik w nav) - bez animacji
+        } else {
+          el.style.transitionDelay = Math.min(step * 0.09, 0.45) + 's';
+          el.classList.add('on');
+          fadeObs.unobserve(el);
+          step++;
+        }
+      }
+      revealed = Math.max(revealed, maxIdx + 1);
+      pending.clear();
+    };
+
+    const fadeObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) pending.add(entry.target); });
+      if (pending.size && !frame) frame = requestAnimationFrame(flush);
+    }, { threshold: 0.08 });
+    fades.forEach(el => fadeObs.observe(el));
+
+    // Polityka prywatności
+    const pp = document.getElementById('pp');
+    document.querySelectorAll('.pp-open').forEach(b => b.addEventListener('click', () => pp.showModal()));
+    document.getElementById('pp-close').addEventListener('click', () => pp.close());
+    pp.addEventListener('click', e => { if (e.target === pp) pp.close(); });
+
+    // Formularz - Web3Forms
+    const form = document.getElementById('cform');
+    const out = document.getElementById('f-out');
+    const submitBtn = document.getElementById('f-submit');
+    const FALLBACK = 'Zadzwoń: 600 948 664 lub napisz na webdeweloperpl@gmail.com.';
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      out.className = 'form-msg';
+      out.textContent = '';
+
+      const name = form.name.value.trim();
+      const contact = form.contact.value.trim();
+      const msg = form.message.value.trim();
+      if (!name || !contact || !msg) {
+        out.classList.add('err');
+        out.textContent = 'Uzupełnij imię, kontakt i treść wiadomości.';
+        return;
+      }
+      if (!document.getElementById('f-consent').checked) {
+        out.classList.add('err');
+        out.textContent = 'Zaznacz zgodę na przetwarzanie danych.';
+        return;
+      }
+      if (form.access_key.value === 'WEB3FORMS_KEY') {
+        out.classList.add('err');
+        out.textContent = 'Formularz jest chwilowo nieaktywny. ' + FALLBACK;
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(form));
+      if (contact.includes('@')) data.email = contact;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wysyłanie...';
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        if (!json.success) throw new Error();
+        form.reset();
+        out.classList.add('ok');
+        out.textContent = 'Dziękuję! Wiadomość dotarła. Odezwę się najszybciej, jak to możliwe.';
+      } catch {
+        out.classList.add('err');
+        out.textContent = 'Nie udało się wysłać wiadomości. ' + FALLBACK;
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Wyślij wiadomość';
+      }
+    });
+  </script>
+</body>
+
+</html>
