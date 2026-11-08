@@ -246,7 +246,8 @@
     @media (max-width: 768px) {
       .hero { padding: 22px 0 56px; align-items: flex-start; }
       .hero-grid { row-gap: 26px; }
-      .hero-h1 { font-size: 32px; margin: 0 0 12px; }
+      /* Rozmiar liczony od szerokości ekranu: "które przyprowadzają" zawsze mieści się w linii, więc nagłówek ma 3 linie na każdym telefonie */
+      .hero-h1 { font-size: clamp(28px, calc((100vw - 40px) / 10.4), 34px); margin: 0 0 12px; }
       .hero-sub { font-size: 16px; line-height: 1.6; }
       .hero-btns { flex-direction: column; align-items: stretch; margin-top: 28px; }
       .hero-btns .btn { text-align: center; }
