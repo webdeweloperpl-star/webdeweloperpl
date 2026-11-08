@@ -203,12 +203,13 @@
       mask-image: radial-gradient(ellipse 70% 60% at 70% 40%, #000 0%, transparent 75%);
       opacity: 0.6;
     }
-    .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 34px 64px; align-items: center; }
     .hero-h1 { font-size: clamp(36px, 5.2vw, 62px); font-weight: 800; margin: 0 0 22px; }
     .hero-h1 em { font-style: normal; color: var(--accent); }
     .hero-sub { font-size: 18px; color: var(--muted); max-width: 500px; }
     .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-    .hero-points { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 34px; }
+    .hero-points { grid-column: 1 / -1; list-style: none; display: flex; flex-wrap: wrap; gap: 10px 44px; }
+    .hero-points li { white-space: nowrap; }
     .nowrap { white-space: nowrap; }
     .hero-points li { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; }
     .hero-points svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
@@ -246,7 +247,7 @@
       .hero-sub { font-size: 16px; line-height: 1.6; }
       .hero-btns { flex-direction: column; align-items: stretch; margin-top: 28px; }
       .hero-btns .btn { text-align: center; }
-      .hero-points { flex-direction: column; margin-top: 28px; }
+      .hero-points { flex-direction: column; }
     }
 
     /* ---------- FADE (kolejka z góry na dół) ---------- */
@@ -457,16 +458,17 @@
             <a href="#realizacje" class="btn btn-primary">Zobacz realizacje</a>
             <a href="#kontakt" class="btn btn-outline">Napisz do mnie</a>
           </div>
-          <ul class="hero-points">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Najpierw projekt, potem decyzja</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Idealna na telefonie</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Bezpośredni kontakt ze mną</li>
-          </ul>
         </div>
         <div class="hero-visual" aria-hidden="true">
           <div class="browser b1"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt=""></div>
           <div class="browser b2"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt=""></div>
         </div>
+        <!-- Atuty: osobny rząd na całą szerokość, żeby zmieściły się poziomo na desktopie -->
+        <ul class="hero-points">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Najpierw projekt, potem decyzja</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Idealna na telefonie</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Bezpośredni kontakt ze mną</li>
+        </ul>
       </div>
     </section>
 
@@ -516,7 +518,7 @@
         <div class="section-head">
           <span class="label fade">Oferta</span>
           <h2 class="section-h2 fade">Wszystko, czego potrzebuje firma w internecie</h2>
-          <p class="section-sub fade">Zaczynamy od strony, a potem dbam o to, żeby klienci mogli Cię łatwo znaleźć.</p>
+          <p class="section-sub fade">Zaczynam od strony, a potem dbam o to, żeby klienci mogli Cię łatwo znaleźć.</p>
         </div>
         <div class="offer-grid">
           <article class="offer-card offer-main fade">
