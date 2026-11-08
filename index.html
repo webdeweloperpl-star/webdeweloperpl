@@ -238,7 +238,7 @@
     .hero-visual .b2 { animation-delay: 0.5s; }
 
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: minmax(0, 1fr); }
       .hero-visual { display: none; }
     }
     @media (max-width: 768px) {
@@ -248,6 +248,21 @@
       .hero-btns { flex-direction: column; align-items: stretch; margin-top: 28px; }
       .hero-btns .btn { text-align: center; }
       .hero-points { flex-direction: column; }
+    }
+
+    /* ---------- HERO MOBILE: pasek realizacji ---------- */
+    .hero-mobile { display: none; }
+    @keyframes marquee { to { transform: translateX(calc(-50% - 7px)); } }
+    @media (max-width: 900px) {
+      .hero-mobile { display: block; grid-column: 1 / -1; animation: heroIn 0.7s ease-out 0.4s both; }
+      .hero-points { animation-delay: 0.5s; }
+      .marquee {
+        overflow: hidden; margin: 0 calc(var(--pad-x) * -1); padding: 6px 0 14px;
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      }
+      .marquee-track { display: flex; gap: 14px; width: max-content; animation: marquee 30s linear infinite; }
+      .marquee .browser { position: relative; width: 250px; flex-shrink: 0; }
     }
 
     /* ---------- FADE (kolejka z góry na dół) ---------- */
@@ -410,6 +425,7 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .fade { opacity: 1; transform: none; }
+      .marquee { overflow-x: auto; }
       html { scroll-behavior: auto; }
     }
   </style>
@@ -462,6 +478,19 @@
         <div class="hero-visual" aria-hidden="true">
           <div class="browser b1"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt=""></div>
           <div class="browser b2"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt=""></div>
+        </div>
+        <!-- Wizual na telefonie: pasek realizacji przewijany w pętli -->
+        <div class="hero-mobile" aria-hidden="true">
+          <div class="marquee">
+            <div class="marquee-track">
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt=""></div>
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt=""></div>
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/orlowska.jpg" alt=""></div>
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/beautyup.jpg" alt="" loading="lazy"></div>
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/cnr.jpg" alt="" loading="lazy"></div>
+              <div class="browser"><div class="browser-bar"><i></i><i></i><i></i></div><img src="img/orlowska.jpg" alt="" loading="lazy"></div>
+            </div>
+          </div>
         </div>
         <!-- Atuty: osobny rząd na całą szerokość, żeby zmieściły się poziomo na desktopie -->
         <ul class="hero-points">
