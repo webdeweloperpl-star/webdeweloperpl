@@ -30,9 +30,15 @@
     })();
   </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    /* Fonty lokalnie (bez Google Fonts, RODO) */
+    @font-face { font-family: 'Inter'; font-style: normal; font-display: swap; font-weight: 100 900; src: url(fonts/inter-latin-ext-wght-normal.woff2) format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-display: swap; font-weight: 100 900; src: url(fonts/inter-latin-wght-normal.woff2) format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+    @font-face { font-family: 'Manrope'; font-style: normal; font-display: swap; font-weight: 200 800; src: url(fonts/manrope-latin-ext-wght-normal.woff2) format('woff2'); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+    @font-face { font-family: 'Manrope'; font-style: normal; font-display: swap; font-weight: 200 800; src: url(fonts/manrope-latin-wght-normal.woff2) format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  </style>
 
   <script type="application/ld+json">
   {
@@ -415,6 +421,9 @@
     .pp-body { padding: 24px 28px 32px; font-size: 15px; color: var(--muted); }
     .pp-body h3 { font-size: 16px; color: var(--text); margin: 22px 0 6px; }
     .pp-body strong { color: var(--text); }
+    .pp-body p + p { margin-top: 8px; }
+    .pp-body ul { margin: 8px 0; padding-left: 20px; list-style: disc; }
+    .pp-body li + li { margin-top: 4px; }
 
     /* ---------- RESPONSYWNOŚĆ SEKCJI ---------- */
     @media (max-width: 1024px) {
@@ -714,17 +723,31 @@
       <button type="button" class="theme-btn" id="pp-close" aria-label="Zamknij">&#x2715;</button>
     </div>
     <div class="pp-body">
-      <p><strong>Administrator danych:</strong> Web Deweloper PL, tel. 600 948 664, e-mail webdeweloperpl@gmail.com.</p>
-      <h3>Cel i podstawa</h3>
-      <p>Dane podane w formularzu, telefonicznie lub mailowo (imię, telefon lub e-mail, treść wiadomości) przetwarzam wyłącznie w celu odpowiedzi i przygotowania oferty, na podstawie art. 6 ust. 1 lit. a i b RODO. Nie wysyłam reklam i nie przekazuję danych innym firmom.</p>
-      <h3>Formularz</h3>
-      <p>Wiadomości z formularza trafiają na moją skrzynkę przez usługę Web3Forms, która działa wyłącznie jako pośrednik w dostarczeniu wiadomości.</p>
-      <h3>Okres przechowywania</h3>
-      <p>Dane przechowuję tak długo, jak to potrzebne do udzielenia odpowiedzi i ewentualnej współpracy, a następnie przez okres wymagany przepisami prawa.</p>
-      <h3>Hosting i czcionki</h3>
-      <p>Strona jest hostowana przez Vercel i korzysta z Google Fonts. Przeglądarka łączy się z ich serwerami, przekazując adres IP w celu wyświetlenia strony. Strona nie używa plików cookies do śledzenia.</p>
+      <p><strong>Administrator danych:</strong> Hubert Orłowski, prowadzący działalność nierejestrowaną pod marką Web Deweloper PL. Kontakt: tel. 600 948 664, e-mail webdeweloperpl@gmail.com.</p>
+      <h3>Jakie dane i w jakim celu</h3>
+      <p>Dane podane w formularzu, telefonicznie lub mailowo (imię, telefon lub e-mail, treść wiadomości) przetwarzam wyłącznie po to, żeby odpowiedzieć na wiadomość i przygotować ofertę. Podstawa prawna: Twoja zgoda (art. 6 ust. 1 lit. a RODO) oraz działania przed zawarciem umowy podejmowane na Twoje żądanie (art. 6 ust. 1 lit. b RODO).</p>
+      <p>Jeśli dojdzie do współpracy, dane przetwarzam także w celu realizacji umowy (art. 6 ust. 1 lit. b RODO) oraz ewentualnego ustalenia, dochodzenia lub obrony roszczeń, co jest moim prawnie uzasadnionym interesem (art. 6 ust. 1 lit. f RODO).</p>
+      <p>Nie wysyłam reklam i nie sprzedaję ani nie udostępniam danych w celach marketingowych.</p>
+      <h3>Cofnięcie zgody</h3>
+      <p>Zgodę możesz cofnąć w każdej chwili, pisząc na adres e-mail podany wyżej. Cofnięcie zgody nie wpływa na zgodność z prawem przetwarzania, którego dokonano przed jej cofnięciem.</p>
+      <h3>Dobrowolność</h3>
+      <p>Podanie danych jest dobrowolne, ale bez nich nie mogę odpowiedzieć na wiadomość.</p>
+      <h3>Komu przekazuję dane</h3>
+      <p>Dane trafiają wyłącznie do firm, które technicznie obsługują stronę i pocztę, działających na moje zlecenie:</p>
+      <ul>
+        <li>Cloudflare, Inc. (hosting strony), które przy wyświetlaniu strony przetwarza adres IP,</li>
+        <li>Web3Forms (dostarczenie wiadomości z formularza na moją skrzynkę),</li>
+        <li>Google Ireland Ltd. (skrzynka Gmail, na którą przychodzą wiadomości).</li>
+      </ul>
+      <p>Część z tych firm może przetwarzać dane poza Europejskim Obszarem Gospodarczym, w tym w USA. Odbywa się to na podstawie decyzji Komisji Europejskiej (EU-US Data Privacy Framework) lub standardowych klauzul umownych zatwierdzonych przez Komisję.</p>
+      <p>Strona nie używa plików cookies ani narzędzi analitycznych.</p>
+      <h3>Jak długo przechowuję dane</h3>
+      <p>Jeśli nie dojdzie do współpracy, przechowuję dane do 12 miesięcy od ostatniego kontaktu. Jeśli dojdzie, przechowuję je przez czas współpracy, a następnie do upływu terminu przedawnienia roszczeń lub okresu wymaganego przepisami prawa.</p>
       <h3>Twoje prawa</h3>
-      <p>Masz prawo do wglądu, poprawienia i usunięcia swoich danych oraz wniesienia skargi do Prezesa UODO. Wystarczy napisać na adres podany wyżej.</p>
+      <p>Masz prawo do dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania i przenoszenia, wniesienia sprzeciwu (gdy podstawą jest art. 6 ust. 1 lit. f RODO) oraz cofnięcia zgody. Wystarczy napisać na adres podany wyżej.</p>
+      <p>Masz też prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2, 00-193 Warszawa).</p>
+      <h3>Profilowanie</h3>
+      <p>Nie podejmuję zautomatyzowanych decyzji i nie profiluję na podstawie Twoich danych.</p>
     </div>
   </dialog>
 
