@@ -215,6 +215,7 @@
     .hero-h1 { font-size: clamp(36px, 5.2vw, 62px); font-weight: 800; margin: 0 0 22px; }
     .hero-h1 em { font-style: normal; color: var(--accent); }
     .hero-sub { font-size: 18px; color: var(--muted); max-width: 500px; }
+    .br-m { display: none; }
     .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
     .hero-points { grid-column: 1 / -1; list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 44px; }
     .hero-points li { white-space: nowrap; }
@@ -252,8 +253,10 @@
     @media (max-width: 768px) {
       .hero { padding: 22px 0 56px; align-items: flex-start; }
       .hero-grid { row-gap: 26px; }
-      .hero-h1 { font-size: 32px; margin: 0 0 12px; }
-      .hero-sub { font-size: 16px; line-height: 1.6; }
+      /* Stałe łamanie linii na każdym telefonie: font maleje tylko gdy najdłuższa linia się nie mieści (np. 360px) */
+      .br-m { display: inline; }
+      .hero-h1 { font-size: min(32px, calc((100vw - 2 * var(--pad-x)) / 10.3)); margin: 0 0 12px; }
+      .hero-sub { font-size: min(16px, calc((100vw - 2 * var(--pad-x)) / 19.6)); line-height: 1.6; max-width: none; }
       .hero-btns { flex-direction: column; align-items: stretch; margin-top: 28px; }
       .hero-btns .btn { text-align: center; }
       .hero-points { flex-direction: column; }
@@ -493,8 +496,8 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-text">
-          <h1 class="hero-h1">Nowoczesne strony, które <em>przyprowadzają Ci klientów</em></h1>
-          <p class="hero-sub">Projektuję i wdrażam przejrzyste strony internetowe, dzięki którym odwiedzający stają się Twoimi klientami.</p>
+          <h1 class="hero-h1">Nowoczesne strony,<br class="br-m"> które <em>przyprowadzają<br class="br-m"> Ci klientów</em></h1>
+          <p class="hero-sub">Projektuję i wdrażam przejrzyste strony<br class="br-m"> internetowe, dzięki którym odwiedzający<br class="br-m"> stają się Twoimi klientami.</p>
           <!-- Wizual na telefonie: pasek realizacji przewijany w pętli (przed przyciskami) -->
           <div class="hero-mobile" aria-hidden="true">
             <div class="marquee">
